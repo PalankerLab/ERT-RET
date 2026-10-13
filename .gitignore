@@ -1,0 +1,16 @@
+
+.idea/
+
+.DS_Store
+
+analysis_stage/__pycache__/
+
+ml_decoder/__pycache__/
+
+data_processing/multielec_src/__pycache__/
+
+__pycache__/
+
+venv/
+
+*.png

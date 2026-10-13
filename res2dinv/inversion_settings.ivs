@@ -1,0 +1,1195 @@
+[Model discretization]
+Selectable=0
+Selected=1
+DisplayName=Model
+GroupName=Discretization
+Advanced=0
+Visible=1
+Description=
+[Model discretization\Allow number of model parameters to exceed data points]
+Display=Allow parameters to exceed data points
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. If set to 0, the number of model parameters is limited to the same as the number of measurements in the dataset.
+Visible=1
+[Model discretization\Use extended model]
+Display=Use extended model
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. Allow the model to be finely discretized outside of the area covered by the pseudosection, is it only recommended to set this settings to 0 if you running low on computational resources.
+Visible=1
+[Vertical discretization]
+Selectable=0
+Selected=1
+DisplayName=Vertical
+GroupName=Discretization
+Advanced=0
+Visible=1
+Description=
+[Vertical discretization\Thickness of first layer]
+Display=Thickness of first layer
+Type=Real
+Min=0.25
+Max=1
+Default=0.375
+User=0.25
+Advanced=0
+Description=Thickness of the first (most surface near) layer in the model as a fraction of the unit electrode spacing.
+Visible=1
+[Vertical discretization\Factor to increase thickness layer with depth]
+Display=Layer thickness increase factor
+Type=Real
+Min=1
+Max=1.25
+Default=1.1
+User=1
+Advanced=0
+Description=Thickness of each model layer in % of thickness of the above layer (1.1 = 10%). Thickness of the first layer is defined in the setting 'Thickness of first layer'.
+Visible=1
+[Vertical discretization\Factor to increase model depth range]
+Display=Model depth range
+Type=Real
+Min=1
+Max=5
+Default=1.05
+User=2
+Advanced=0
+Description=To use a model that spans a deeper depth range, you can change the factor to increase model depth range, for example from 1.0 to 1.30 to increase the model depth range by 30%.
+Visible=1
+[Vertical discretization\Model for increase in thickness of layers]
+Display=Model for layer thickness increase
+Type=Discrete
+OptionsList=0,1,2
+Default=2
+User=2
+Advanced=0
+Description=0=default 10%, 1=default 25%, 2=user defined (Value is defined under 'Layer thickness increase factor').
+Visible=0
+[Horizontal discretization]
+Selectable=0
+Selected=1
+DisplayName=Horizontal
+GroupName=Discretization
+Advanced=0
+Visible=1
+Description=
+[Horizontal discretization\Width of blocks]
+Display=Width of blocks
+Type=Int
+Min=1
+Max=15
+Default=1
+User=1
+Advanced=0
+Description=This option allows the user to force the program to use model cells that are wider than one unit electrode spacing for all the layers. It is mainly intended for data collected from mobile surveys where a cable with fixed electrodes positions is dragged along during the survey. The distances between the measurement points are often much less than the spacing between the electrode takeouts. The model block widths can be set to 1 to 15 times the unit electrode spacing.
+Visible=1
+[Horizontal discretization\Make sure blocks have the same width]
+Display=Make blocks equal width
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. If selected all model blocks will have the same width.
+Visible=1
+[Horizontal discretization\Model refinement]
+Display=Model refinement
+Type=Discrete
+OptionsList=0.5,1
+Default=1
+User=1
+Advanced=0
+Description=The program by default uses a model where the width of the interior model blocks is the same as the unit electrode spacing. This works well in most cases. In situations with large resistivity variations near the ground surface better results can be obtained by using model cells with a width of half the electrode spacing.
+Visible=1
+[Horizontal discretization\Generate model blocks]
+Display=Generate model blocks from sensitivity values
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. If set to 1, this option allocates the arrangement of the blocks in the model using the sensitivity values as a guide. The model created using the sensitivity values increases the width of the blocks near the sides in the deeper parts of the model section in order to increase the sensitivity values of the blocks.
+Visible=1
+[Forward modelling settings]
+Selectable=0
+Selected=1
+DisplayName=Forward modelling
+GroupName=Discretization
+Advanced=0
+Visible=1
+Description=
+[Forward modelling settings\Type of mesh]
+Display=Vertical mesh size
+Type=Discrete
+OptionsList=0,1,2
+Default=0
+User=2
+Advanced=0
+Description=0=Normal,1=Fine,2=Finest. This option allows you to use a finer mesh (in the vertical direction) for the finite-difference or finite-element method. The model for a survey line on the surface normally uses a finer mesh for the top two layers, and a single mesh line for the deeper layers. This option allows the use of a finer mesh for the deeper layers. The apparent resistivity values calculated will be more accurate with a finer mesh, but the computer time and memory required will be greater. The use of a finer mesh can give better results for cases where subsurface resistivity contrasts of greater than 20:1 is expected. This is particularly useful in areas where a low resistivity layer lies below a high resistivity layer.
+Visible=1
+[Forward modelling settings\Number of nodes between adjacent electrodes]
+Display=Horizontal mesh size
+Type=Discrete
+OptionsList=1,2,4
+Default=2
+User=4
+Advanced=0
+Description=Option to set the mesh grid used by the forward modeling program to have 1, 2 or 4 nodes between adjacent electrodes. With 4 nodes per electrode spacing, the calculated apparent resistivity values are more accurate (particularly for large resistivity contrasts). However, the computer time and memory required are correspondingly larger. By default, the program will use the 2 nodes option. In normal surveys with electrodes planted into the ground, the spacing between adjacent electrodes is usually the same as the minimum spacing between two electrodes used in an array. In surveys using a mobile cable system, on land or a streamer in aquatic surveys, the spacing between adjacent electrodes along the survey line can be several times smaller than the minimum spacing between two electrodes used in an array used for the measurements. For such data sets, the '1 node' option can be used to reduce the calculation time and memory required by the forward modeling routine.
+Visible=1
+[Stopping criteria]
+Selectable=0
+Selected=1
+DisplayName=Stopping criteria
+GroupName=
+Advanced=0
+Visible=1
+Description=
+[Stopping criteria\Convergence limit for relative change in RMS error in percent]
+Display=Convergence limit
+Type=Real
+Min=0.1
+Max=20
+Default=5
+User=5
+Advanced=0
+Description=The relative change in the RMS error between 2 iterations. If the change is below selected value, the inversion will stop.
+Visible=1
+[Stopping criteria\RMS CONVERGENCE LIMIT]
+Display=RMS convergence limit
+Type=Real
+Min=0.01
+Max=20
+Default=0.1
+User=0.1
+Advanced=0
+Description=This sets the percentage RMS error in the inversion of the apparent resistivity data where the program will stop after the model produce has an RMS error less than this limit.
+Visible=1
+[Stopping criteria\Number of iterations]
+Display=Number of iterations
+Type=Int
+Min=1
+Max=30
+Default=15
+User=15
+Advanced=0
+Description=This allows the user to set the maximum number of iterations before the inversion stops.
+Visible=1
+[Settings]
+Selectable=0
+Selected=1
+DisplayName=Settings
+GroupName=Inversion methodology
+Advanced=0
+Visible=1
+Description=
+[Settings\Calculate model resolution]
+Display=Calculate model resolution
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=The model resolution gives a measure of how widely the information from a region of the subsurface is spread out to the surrounding model cells in the inverse model. This calculation will increase the inversion time.
+Visible=1
+[Settings\Reduce effect of side blocks]
+Display=Reduce effect of side blocks
+Type=Discrete
+OptionsList=0,1,2,3
+Default=1
+User=1
+Advanced=0
+Description=0=No, 1=Slight, 2=Severe, 3=Very Severe. This option affects the calculation of the Jacobian matrix values for the model blocks located at the sides and bottom of the model section. Normally, for a block located at the side, the contributions by all the mesh elements associated with the model block are added up right to the edge of the mesh. This gives a greater weight to the side block compared to the interior blocks. In some cases, particularly when the robust inversion option is used, this can result in unusually a high or low resistivity value for the side block. This option limits the contribution of the mesh elements outside the ends of the survey line to the Jacobian matrix values for the side blocks.
+Visible=1
+[Settings\USE LOGARITHM OF APPARENT RESISTIVITY]
+Display=Data space
+Type=Discrete
+OptionsList=0,2
+Default=0
+User=0
+Advanced=0
+Description=0=Use logarithmic data space, 2=Use linear data space
+Visible=1
+[Settings\Use fast Jacobian calculation for dense data sets]
+Display=Use fast Jacobian calculation for dense data sets
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=This option uses an optimized routine for calculating the Jacobian matrix values for data sets where the number of data points is much greater than the number of electrodes used in making the measurements. Note for some very sparse data sets, this routine can be even slower than the standard method.
+Visible=1
+[Settings\USE FINITE ELEMENT METHOD]
+Display=Always use Finite-element settings*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=This allows you to use either the finite-difference or finite-element method to calculate the apparent resistivity values. By default, the program will use the finite-difference method which is faster if the data set does not contain topography. If the data set contains topography, the default choice is the finite-element method.
+Visible=1
+[Settings\Flatness filter type, Include smoothing of model resistivity]
+Display=Use smoothing of model resistivities*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=0 = Use smoothing on model changes only, 1= use smoothing directly on model as well.
+Visible=1
+[Settings\Combined Combined Marquardt and Occam inversion]
+Display=Combine Marquardt & smoothness constraints*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=Combining the damped least squares method with the smoothness-constrained method, is intended for use in unusual situations where the data sensitivity values of the model blocks are significantly distorted by large resistivity variations.
+Visible=1
+[Settings\Local optimization option]
+Display=Local optimization option*
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=1
+Description=Placeholder.
+Visible=1
+[Settings\Use data compression with Incomplete Gauss-Newton]
+Display=Use data compression with Incomplete Gauss-Newton*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=Placeholder.
+Visible=0
+[Settings\Type of finite-element method]
+Display=Type of finite-element method
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=0=Triangular,1=Trapezoidal elements.
+Visible=0
+[LS solver type]
+Selectable=0
+Selected=1
+DisplayName=LS solver type
+GroupName=Inversion methodology
+Advanced=0
+Visible=1
+Description=
+[LS solver type\Type of optimisation method]
+Display=Type of optimisation method
+Type=Discrete
+OptionsList=0,2
+Default=2
+User=2
+Advanced=0
+Description=0=Standard Gauss-Newton,2=Incomplete Gauss-Newton. The Standard Gauss-Newton least-squares method, that calculates an exact solution of the least-squares equation, should be used if the number of data points and/or model cells is small (less than a few thousand). If the number of data points and/or model cells is large, the time taken to solve the least-squares equation could be the most time-consuming part of the inversion process. To reduce the inversion time, an alternative method that calculates an approximate solution of the least-squares equation using the Incomplete Gauss-Newton method can be used.
+Visible=1
+[LS solver type\Convergence limit for Incomplete Gauss-Newton method]
+Display=Convergence limit for Incomplete Gauss-Newton method
+Type=Real
+Min=0.005
+Max=0.05
+Default=0.005
+User=0.005
+Advanced=0
+Description=Set the convergence accuracy of the solution. For most data sets, an accuracy of about 1% (i.e. a convergence limit of 0.01
+Visible=1
+[LS solver type\Type of Jacobian matrix calculation]
+Display=Type of LS equation solver
+Type=Discrete
+OptionsList=0,1,2
+Default=1
+User=1
+Advanced=0
+Description=0=Quasi-Newton, 1=Gauss-Newton, 2=Mixed.
+Visible=0
+[Data/model norm]
+Selectable=0
+Selected=1
+DisplayName=Data/model norm
+GroupName=Inversion methodology
+Advanced=0
+Visible=1
+Description=
+[Data/model norm\Robust data constrain]
+Display=Data norm (L1,L2)
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=0=L2, 1=L1. The conventional least-squares method, L2 norm, ('standard data constraint') will attempt to minimize the square of difference between the measured and calculated apparent resistivity values. This method gives reasonable results if the data contains random or 'Gaussian' noise. However, if the data set contains 'outlier' data points, this method is less satisfactory. To reduce the effect of such 'outlier' data points, the L1 norm method ('robust data constraint') inversion method where the absolute difference the measured and calculated apparent resistivity values is minimized can be used
+Visible=1
+[Data/model norm\Cutoff factor for data constrain]
+Display=L1 data norm cutoff factor
+Type=Real
+Min=0.0001
+Max=0.1
+Default=0.05
+User=0.05
+Advanced=0
+Description=The cutoff factor controls the degree in which this robust data constrain is used. If a value of 0.05 is used, this means the effect of data points where the differences in the measured and calculated apparent resistivity values are much greater than 5 percent will be greatly reduced.
+Visible=1
+[Data/model norm\Robust model constrain]
+Display=Model norm (L1,L2)
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=0=L2, 1=L1. The conventional smoothness-constrained least squares method also attempts to minimize the square of the changes (L2 model norm) in the model resistivity values. This will produce a model with a smooth variation in the resistivity values. Such a model is more suitable where subsurface resistivity also changes in a smooth manner. However, if the subsurface bodies have sharp boundaries, such as the soil-bedrock interface or massive homogeneous bodies, the conventional least-squares smoothness-constrain method tends to smear the boundaries. If the robust model constrained inversion method (L1 model norm) is used, the program will attempt to minimize the absolute changes in the resistivity values. This constraint tends to produce models with sharp interfaces between different regions with different resistivity values, but within each region the resistivity value is almost constant.
+Visible=1
+[Data/model norm\Cutoff factor for model constrain]
+Display=L1 model norm cutoff factor
+Type=Real
+Min=0.0001
+Max=0.1
+Default=0.05
+User=0.005
+Advanced=0
+Description=The cut-off factor controls the degree in which this robust model constrain is used. If a large value is used, for example 1.0, the result is essentially that of the conventional smoothness-constrained least-squares inversion method. If a very small value is used, for example 0.001, the result is close to the true L1-norm inversion method.
+Visible=1
+[Parameter range]
+Selectable=0
+Selected=1
+DisplayName=Parameter range
+GroupName=Inversion methodology
+Advanced=0
+Visible=1
+Description=
+[Parameter range\LIMIT RESISTIVITY VALUES]
+Display=Limit resistivity values
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. Limit the resistivity upper and lower limits with the values in the next settings.
+Visible=1
+[Parameter range\Upper limit factor]
+Display=DC upper limit factor
+Type=Real
+Min=10
+Max=50
+Default=50
+User=50
+Advanced=0
+Description=For resistivity limitation, in units of average resistivity of previous iterations.
+Visible=1
+[Parameter range\Lower limit factor]
+Display=DC Lower limit factor
+Type=Real
+Min=0.02
+Max=0.1
+Default=0.02
+User=0.02
+Advanced=0
+Description=For resistivity limitation, in units of average resistivity of previous iterations.
+Visible=1
+[Parameter range\Model Chargeability Upper Limit (mV/V) for range]
+Display=IP Upper Limit
+Type=Real
+Min=100
+Max=900
+Default=900
+User=900
+Advanced=0
+Description=Upper limit for model chargeability in mV/V.
+Visible=1
+[Parameter range\Model Chargeability Lower Limit (mV/V) for range]
+Display=IP Lower Limit
+Type=Real
+Min=0
+Max=50
+Default=0
+User=0
+Advanced=0
+Description=Lower limit for model chargeability in mV/V.
+Visible=1
+[Long survey lines]
+Selectable=0
+Selected=1
+DisplayName=Long survey lines
+GroupName=Inversion methodology
+Advanced=0
+Visible=1
+Description=
+[Long survey lines\Optimize Jacobian matrix calculation]
+Display=Optimize Jacobian matrix
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. This can significantly reduce the calculation time without affecting the accuracy of the values
+Visible=1
+[Long survey lines\Use fast method to calculate Jacobian matrix]
+Display=Use fast method to calculate Jacobian matrix
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. Use a fast method to calculate the Jacobian matrix by excluding the model cells that are far away from the electrodes used in an array. The Jacobian matrix values and thus the inversion model will be slightly different from that obtained using the standard method
+Visible=1
+[Long survey lines\Use sparse inversion method for very long survey lines]
+Display=Use sparse inversion method
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. Intended for long survey lines with 500 electrodes positions or more. This method will still produce a contiguous model along the entire survey line but takes advantage of the sparse nature of the Jacobian matrix to reduce the number of calculations needed. The results will be slightly different (usually less than 5%) from that obtained using the standard method.
+Visible=1
+[Reference model]
+Selectable=0
+Selected=1
+DisplayName=Reference model*
+GroupName=Inversion methodology
+Advanced=1
+Visible=1
+Description=
+[Reference model\Use reference model in inversion]
+Display=Use reference model*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=1=Yes, 0=No. A reference model can be used to stabilize the inversion, by limiting extreme resistivity and chargeability values.
+Visible=1
+[Reference model\Damping factor for reference model]
+Display=Damping factor for reference*
+Type=Real
+Min=0
+Max=1
+Default=0.01
+User=0.01
+Advanced=1
+Description=A damping factor that controls the degree where the inversion model is 'close' to a reference model is used
+Visible=1
+[Reference model\Type of reference resistivity]
+Display=Type of reference resistivity*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=0 = The reference model will be the average of all measured apparent resistivity values, 1= the reference model will be resistivity model after first iteration.
+Visible=1
+[Reference model\Use zero reference I.P. model value]
+Display=Use zero reference I.P. model*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=1=Yes, 0=No, if 1, a chargeability of zero is used as the reference model for the IP inversion, otherwise the average measured apparent I.P will be used.
+Visible=1
+[Damping settings]
+Selectable=0
+Selected=1
+DisplayName=DC
+GroupName=Damping settings
+Advanced=0
+Visible=1
+Description=
+[Damping settings\Initial damping factor]
+Display=Initial damping factor
+Type=Real
+Min=0.01
+Max=1
+Default=0.15
+User=0.1
+Advanced=0
+Description=If the data set is very noisy, you should use a relatively larger damping factor (for example 0.3). If the data set is less noisy, use a smaller initial damping factor (for example 0.1). The inversion program automatically reduces the damping factor by about half after each iteration until it reaches the selected minimum value.
+Visible=1
+[Damping settings\Minimum damping factor]
+Display=Minimum damping factor
+Type=Real
+Min=0.001
+Max=0.75
+Default=0.02
+User=0.01
+Advanced=0
+Description=The inversion program automatically reduces the damping factor by about half after each iteration until it reaches the selected minimum value.
+Visible=1
+[Damping settings\Use higher damping for first layer]
+Display=Enable first layer damping
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. The first few layers can show a rippling effect. This can be reduced by using a higher damping factor for the first layer.
+Visible=1
+[Damping settings\Extra damping factor for first layer]
+Display=Extra damping factor for first layer
+Type=Real
+Min=1
+Max=100
+Default=4
+User=4
+Advanced=0
+Description=Only applies if above setting is on, defines how much extra damping is applied to first layer.
+Visible=1
+[Damping settings\Use higher damping factors at sides of model]
+Display=Damping factors for changes in distance between blocks
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=Use higher damping factors for changes in distance between blocks
+Visible=1
+[Damping settings\Adjust damping factors for distances between the blocks in the model]
+Display=Adjust damping factors for changes in distance between blocks
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=Adjust the damping factor for the different layers to take into account changes in the distances between the model cells.
+Visible=1
+[Damping settings\Increase of damping factor with depth]
+Display=Increase of damping factor
+Type=Real
+Min=1
+Max=2
+Default=1.05
+User=1.05
+Advanced=0
+Description=Since the resolution of the resistivity method decreases exponentially with depth, the damping factor used in the inversion least-squares method is normally also increased with each deeper layer in order to stabilize the inversion process. Normally, the damping factor is increased by 1.05 times with each deeper layer, but you can change it. Use a larger value if the model shows unnatural oscillations in the resistivity values in the lower sections. This will help to suppress the oscillations.
+Visible=1
+[Damping settings\Use automatic calculation for change of damping factor with depth]
+Display=Automatic calculation of damping factor with depth
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. You can select the choice to allow the program to determine the value to increase the damping factor with depth automatically. This might be a good choice if the thickness of the layers is much thinner than the default values, for example if you had reduced the unit electrode spacing by half in the data file in order to produce a model with smaller model blocks.
+Visible=1
+[Damping settings\Optimise damping factor]
+Display=Optimise damping factor
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=Instead of automatically decreasing the damping factor by half after each iteration, the 'Optimize damping factor' option allows the program to look for an optimum damping factor.
+Visible=0
+[IP damping settings]
+Selectable=0
+Selected=1
+DisplayName=IP
+GroupName=Damping settings
+Advanced=0
+Visible=1
+Description=
+[IP damping settings\IP DAMPING FACTOR]
+Display=IP damping factor
+Type=Real
+Min=0.01
+Max=1
+Default=0.25
+User=0.25
+Advanced=0
+Description=Controls the amplitude of the change in the model IP values allowed after each iteration. A smaller IP damping factor can be used can be used to allow a greater change in the IP model values. If a value of 1.0 is used, then the same damping factors will be used for both the resistivity and IP inversion routines. Normally a much smaller value of about 0.10 to 0.25 is used.
+Visible=1
+[IP damping settings\USE AUTOMATIC IP DAMPING FACTOR]
+Display=Automatic IP damping factor
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. Automatic estimate the IP damping factor from the Jacobian Matrix.
+Visible=1
+[IP damping settings\I.P. model damping factor]
+Display=I.P. model damping factor
+Type=Real
+Min=0.05
+Max=1
+Default=0.25
+User=0.25
+Advanced=0
+Description=Placeholder.
+Visible=0
+[IP damping settings\Use program estimate for I.P. model damping factor]
+Display=Use program estimate for I.P.
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=Placeholder.
+Visible=0
+[Flatness filters]
+Selectable=0
+Selected=1
+DisplayName=Flatness filters
+GroupName=Damping settings
+Advanced=0
+Visible=1
+Description=
+[Flatness filters\Vertical to horizontal flatness filter ratio]
+Display=Vertical to horizontal flatness ratio
+Type=Real
+Min=0.25
+Max=4
+Default=1
+User=1
+Advanced=0
+Description=By default, the same damping factor is used for both. However, if the anomalies in the subsurface are expected to be elongated vertically, you can force the program to produce models that are also elongated vertically by selecting a higher value (for example 2.0) for the ratio of the vertical to horizontal flatness filter. For anomalies that are elongated horizontally (e.g. in a sedimentary environment), choose a smaller value (e.g. 0.5).
+Visible=1
+[Flatness filters\Use diagonal filter]
+Display=Use diagonal filter
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. The normal roughness filter used has components in the x and z directions only. Thus, it has a tendency to produce structures aligned along the x and z directions. To reduce this effect, the roughness filter used can be modified so that it has components in the diagonal directions as well.
+Visible=1
+[Flatness filters\Diagonal filter weight]
+Display=Diagonal filter weight
+Type=Real
+Min=0.2
+Max=5
+Default=1
+User=1
+Advanced=0
+Description=Diagonal filter weight.
+Visible=0
+[L-curve]
+Selectable=0
+Selected=1
+DisplayName=L-curve*
+GroupName=Damping settings
+Advanced=1
+Visible=1
+Description=
+[L-curve\Use L curve method]
+Display=Use L-curve method*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=1=Yes, 0=No. In this option, the optimum damping factor is automatically determined by the program using the L-curve method. This method essentially estimates the data misfit and the model roughness for a large range of the damping factor values
+Visible=1
+[L-curve\Use same norms in L curve method]
+Display=Use same norms in L-curve*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=1=Yes, 0=No. Only relevant if you use the 'Robust' or L1-norm method in the 'Data/model norm' setting. This option allows you to use the same L1-norm method within the L-curve routine or use the standard L2-norm method.
+Visible=1
+[L-curve\Allow damping factor in increase in L curve method]
+Display=Allow damping factor to increase during iterations*
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. For rare cases where the damping factor increases after an iteration. This option allows the user to ensure it does not increase.
+Visible=1
+[Topography]
+Selectable=0
+Selected=1
+DisplayName=Topography
+GroupName=
+Advanced=0
+Visible=1
+Description=
+[Topography\Type of topographical modeling]
+Display=Type of topographical modeling
+Type=Discrete
+OptionsList=0,2,4,5
+Default=4
+User=4
+Advanced=0
+Description=0=None, 2=uniform distorted FEM, 4=damped FEM, 5=FEM with inverse Swartz-Christoffel.
+Visible=1
+[Topography\Topography distortion damping factor]
+Display=Topography distortion damping
+Type=Real
+Min=0.1
+Max=2
+Default=0.75
+User=0.75
+Advanced=0
+Description=Damping factor that controls the degree of damping with depth.
+Visible=1
+[Topography\Type of topography trend removal]
+Display=Type of topography trend removal
+Type=Discrete
+OptionsList=0,1,2
+Default=2
+User=2
+Advanced=0
+Description=0=Average,1=Least-squares,2=End to end. Option to remove the average elevation, a least-squares linear trend, or a straight line joining the first and last topography data points. If the ground surface along the survey line is generally flat except for a few points, use the Average option to subtract a constant value from the heights of the electrodes locations. If the survey points are on a slope, choose either a least-squares or an end-to-end straight line for the linear trend.
+Visible=1
+[Topography\Carry out topography modeling]
+Display=Carry out topography modeling
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No.
+Visible=0
+[IP (Induced Polarization) settings]
+Selectable=0
+Selected=1
+DisplayName=IP settings
+GroupName=
+Advanced=0
+Visible=1
+Description=Placeholder.
+[IP (Induced Polarization) settings\Type of I.P. model transformation]
+Display=Type of IP model transformation
+Type=Discrete
+OptionsList=0,1,3
+Default=3
+User=3
+Advanced=0
+Description=0=None, 1=square root, 3=range bound. The 'Square-root' transformation ensures that the model IP is always positive but does not directly set an upper limit. The 'Range bound' method ensures that the model IP values are restricted to the upper and lower range set in the 'Parameter range' settings.
+Visible=1
+[IP (Induced Polarization) settings\Use I.P. model refinement]
+Display=Use IP model refinement
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. In many data sets, the resistivity data misfit has a much larger range than the IP data misfit. This causes the inversion routine to determine a more accurate resistivity model at the expense of the I.P. model that might show a much smaller change with each iteration. To overcome this problem, after calculating the optimum resistivity and I.P. model through a joint inversion, a separate inversion to minimize the I.P. data misfit alone by changing the model I.P. values only (and keeping the model resistivity values fixed) is carried out in each iteration.
+Visible=1
+[IP (Induced Polarization) settings\Joint or separate I.P. inversion method]
+Display=Joint or separate IP inversion
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=1=Separate, 0=Joint. If separate is chosen the IP model is kept fixed during the resistivity inversion, the resistivity model is then refined afterwards. This might be useful for noisy datasets to avoid fitting the noise in the IP model.
+Visible=1
+[IP (Induced Polarization) settings\Use apparent IP data in resistivity inversion]
+Display=Use IP data in resistivity inversion
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Yes, 0=No. If 1, the IP measurements are included in the resistivity model, if 0, they are ignored. This only applies if separate inversion is chosen in the option above.
+Visible=1
+[IP (Induced Polarization) settings\Weight for I.P. data]
+Display=Weight for IP data
+Type=Real
+Min=0.1
+Max=10
+Default=1
+User=1
+Advanced=0
+Description=In most data sets, the data misfit for apparent resistivity values have a much larger range than the apparent IP values. This causes the program to give a greater weight to reducing the data misfit for the apparent resistivity compared to the apparent IP This effect can be compensated by giving a greater weight to the IP data misfit.
+Visible=1
+[IP (Induced Polarization) settings\Type of I.P. smoothness constraint]
+Display=Type of IP smoothness constraint
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=1=Same as resistivity, 0=Different. Normally the program uses the same smoothness constraint for the I.P. inversion as that used for the resistivity inversion. This option allows you to use a different smoothness constraint for the I.P. inversion. If the 'Robust' (L1-norm) method is used for the resistivity inversion, this option allows you to use the 'Smooth' (L2-norm) method for the I.P. inversion. Selecting the L2-norm constraint for the I.P. model might be useful for some cases as it has a much smaller range compared to the resistivity values.
+Visible=1
+[IP (Induced Polarization) settings\Apparent I.P. cutoff value]
+Display=Apparent IP cutoff value
+Type=Real
+Min=300
+Max=899
+Default=899
+User=899
+Advanced=0
+Description=IP data above this value will not be used in the inversion.
+Visible=1
+[IP (Induced Polarization) settings\Type of IP inversion method]
+Display=Type of IP inversion method
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=0=CONCURRENT,1=SEQUENTIAL.
+Visible=0
+[IP (Induced Polarization) settings\PROCEED AUTOMATICALLY FOR SEQUENTIAL METHOD]
+Display=Proceed automatically for IP inversion
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=
+Visible=0
+[Time-lapse settings]
+Selectable=0
+Selected=1
+DisplayName=Time-lapse settings
+GroupName=
+Advanced=0
+Visible=1
+Description=
+[Time-lapse settings\Time-lapse inversion constrain]
+Display=Time-lapse inversion constraint
+Type=Discrete
+OptionsList=0,1,3
+Default=3
+User=3
+Advanced=0
+Description=0=None,1=Smooth,3=Robust
+Visible=1
+[Time-lapse settings\Time-lapse damping factor]
+Display=Time-lapse damping factor
+Type=Real
+Min=0
+Max=5
+Default=0.25
+User=0.25
+Advanced=0
+Description=If a value of 0 is used, the inversion of the different time series data sets will be carried out independently. A value of 1 will give equal weight to reduce the difference between the models at different times and the individual roughness. A larger damping factor for more noisy data sets to reduce artefacts caused by noise.
+Visible=1
+[Time-lapse settings\Reduce time-lapse damping with each iteration]
+Display=Reduce time-lapse damping
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=Reduce damping with 40% for each iteration.
+Visible=1
+[Time-lapse settings\Type of time-lapse inversion method]
+Display=Type of time-lapse inversion
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=0=Simultaneous, 1=Sequential
+Visible=0
+[Time-lapse settings\Use difference of measurements in time-lapse inversion]
+Display=Use difference of measurements
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=Placeholder.
+Visible=0
+[Time-lapse settings\Use same data weights from error estimates for different time series]
+Display=Use same data weights from error
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=Placeholder.
+Visible=0
+[Aquatic Survey Settings]
+Selectable=0
+Selected=1
+DisplayName=Floating Electrodes
+GroupName=
+Advanced=0
+Visible=1
+Description=
+[Aquatic Survey Settings\Floating electrodes survey inversion method]
+Display=Floating electrodes survey inversion
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=0=use fixed water layer, 1=Incorporate water layer into the model. The 'fixed water layer' option is more suitable when the maximum thickness of the water layer is small (less than 20%) compared to the maximum depth of investigation of the survey configuration. In cases where the thickness of the water layer is significant, the 'incorporate the water layer into the model' option is more suitable. The water layer section is included into the inversion model.
+Visible=1
+[Aquatic Survey Settings\Resistivity variation within water layer]
+Display=Resistivity variation within water layer
+Type=Discrete
+OptionsList=0,1
+Default=1
+User=1
+Advanced=0
+Description=0=allow resistivity to vary freely, 1=minimise resistivity variation. If the 'incorporate water layer into the model' option is selected, it is possible to minimize the resistivity variation within the water layer or to allow the water the vary freely.
+Visible=1
+[Aquatic Survey Settings\Water resistivity variation damping factor]
+Display=Water resistivity variation damping
+Type=Real
+Min=0
+Max=12
+Default=8
+User=8
+Advanced=0
+Description=If the 'minimize water resistivity variation' option is selected, this damping factor controls the degree which water resistivity is allowed to vary. A higher value results in a smaller resistivity variation.
+Visible=1
+[Borehole settings]
+Selectable=0
+Selected=1
+DisplayName=Borehole
+GroupName=
+Advanced=0
+Visible=0
+Description=
+[Borehole settings\CUTOFF FACTOR FOR BOREHOLE DATA]
+Display=CUTOFF FACTOR FOR BOREHOLE
+Type=Real
+Min=0.0001
+Max=0.02
+Default=0.001
+User=0.001
+Advanced=0
+Description=
+Visible=1
+[Borehole settings\TYPE OF CROSS-BOREHOLE MODEL]
+Display=TYPE OF CROSS-BOREHOLE MODEL
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=0=normal, 1=halfsize
+Visible=1
+[Borehole settings\Reduce model variations near borehole]
+Display=Reduce model variations near
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=Placeholder
+Visible=1
+[Borehole settings\Factor to control the degree variations near the boreholes are reduced]
+Display=Factor to control the degree
+Type=Real
+Min=2
+Max=100
+Default=5
+User=5
+Advanced=0
+Description=Placeholder. Only relevant if 'Reduce model variations near borehole' setting is true.
+Visible=1
+[Borehole settings\Factor to control variation of borehole damping factor with distance]
+Display=Factor to control variation
+Type=Real
+Min=0.5
+Max=5
+Default=0
+User=0.5
+Advanced=0
+Description=Placeholder. Only relevant if 'Reduce model variations near borehole' setting is true.
+Visible=1
+[Borehole settings\Type of borehole damping method]
+Display=Type of borehole damping method
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=0
+Description=0=Horizontal distance from nearest borehole, 1=Distance from nearest active electrode.
+Visible=1
+[Streamed survey options]
+Selectable=0
+Selected=1
+DisplayName=Streamed survey*
+GroupName=
+Advanced=1
+Visible=0
+Description=
+[Streamed survey options\Shift the electrodes to round up positions of electrodes]
+Display=Shift the electrodes to round up*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=Placeholder.
+Visible=1
+[Streamed survey options\Number of electrodes in segment for sparse inversion method for very long survey lines]
+Display=Number of electrodes in segment*
+Type=Real
+Min=10
+Max=10000
+Default=250
+User=250
+Advanced=1
+Description=Placeholder.
+Visible=1
+[Error estimates]
+Selectable=0
+Selected=1
+DisplayName=Error estimates*
+GroupName=
+Advanced=1
+Visible=0
+Description=
+[Error estimates\Limit range of data weights from error estimates]
+Display=Limit range of data weights
+Type=Bool
+Default=0
+User=0
+Advanced=0
+Description=1=Yes, 0=No. This option is only relevant for a data set where the data error values are also given. The data error values are commonly estimated from reciprocal readings. In some cases there could be a significant error in the error estimates themselves that could lead to unusually low or high weights given to some data points. This option allows the user to set lower and upper limits on the data error weights.
+Visible=1
+[Error estimates\Lower limit of data weights]
+Display=Lower limit of data weights
+Type=Real
+Min=0.2
+Max=0.5
+Default=0.3
+User=0.3
+Advanced=0
+Description=It is recommended that the ratio of the upper to the lower limit is in the range of 4 to 20 times.
+Visible=1
+[Error estimates\Upper limit of data weights]
+Display=Upper limit of data weights
+Type=Real
+Min=2
+Max=5
+Default=3
+User=3
+Advanced=1
+Description=It is recommended that the ratio of the upper to the lower limit is in the range of 4 to 20 times.
+Visible=1
+[Other settings]
+Selectable=0
+Selected=1
+DisplayName=Other settings*
+GroupName=
+Advanced=1
+Visible=0
+Description=
+[Other settings\Minimum change in RMS error for line search in percent]
+Display=Minimum change in RMS error*
+Type=Real
+Min=0.5
+Max=100
+Default=0.5
+User=0.5
+Advanced=1
+Description=Placeholder.
+Visible=1
+[Other settings\Reduce number of topographical data points]
+Display=Reduce number of topographical*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=Placeholder. Slet evt.
+Visible=1
+[Other settings\Use active constraint balancing]
+Display=Use active constraint balancing*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=
+Visible=1
+[Other settings\Type of active constraints]
+Display=Type of active constraints*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=0
+Advanced=1
+Description=0=Normal, 1=Reverse.
+Visible=1
+[Other settings\Lower damping factor limit for active constraints]
+Display=Lower damping factor limit*
+Type=Real
+Min=0
+Max=5
+Default=0.4
+User=0.4
+Advanced=1
+Description=
+Visible=1
+[Other settings\Upper damping factor limit for active constraints]
+Display=Upper damping factor limit*
+Type=Real
+Min=0
+Max=5
+Default=2.5
+User=2.5
+Advanced=1
+Description=
+Visible=1
+[Other settings\Delete temporary files during inversion]
+Display=Delete temporary files during inversion*
+Type=Discrete
+OptionsList=0,1
+Default=0
+User=1
+Advanced=1
+Description=Placeholder. Test
+Visible=1
+[Data settings]
+Selectable=0
+Selected=1
+DisplayName=Data
+GroupName=
+Advanced=0
+Visible=1
+Description=
+[Data settings\Automatically switch electrodes for negative geometric factor]
+Display=Automatically switch electrodes
+Type=Bool
+Default=0
+User=1
+Advanced=0
+Description=For surface data sets with measurements given as apparent resistance, the associated apparent resistivity sometimes becomes negative due to opposite signs of geometric factor and resistance. This is often due to an electrode order where the geometric factor unintentionally is negative (e.g. C1-C2-P1-P2). When this setting is enabled, measurements with negative geometric factor have their potential electrodes (P1 and P2) switched, ensuring a positive geometric factor. When enabled, this option will enforce a positive geometric factor by switching potential electrodes, P1 and P2, when measurements with resistance and negative geometric factor are encountered. Note that this option takes effect when you load a data set.
+Visible=1
+[Data settings\Force resistance value to be consistant with the geometric factor]
+Display=Force positive apparent resistivity
+Type=Bool
+Default=0
+User=0
+Advanced=0
+Description=Under most circumstances, surface data sets should only show positive apparent resistivities. When negative resistivities are encountered, they are commonly the consequence of e.g. inconsistent sign convention for geometric factor or voltages. When this setting is enabled, apparent resistivity is forced to be positive for all measurements. Note that this option takes effect when you load a data set.
+Visible=1
+[Data settings\Filter input data using gemetric factor]
+Display=Filter input data using geometric
+Type=Bool
+Default=0
+User=0
+Advanced=0
+Description=
+Visible=0
+[Data settings\Automatically remove negative apparent resistivity values]
+Display=Remove negative apparent resistivity
+Type=Bool
+Default=1
+User=1
+Advanced=0
+Description=Under most circumstances, surface data sets should only show positive apparent resistivities. When negative resistivities are encountered, they are commonly the consequence of e.g. inconsistent sign convention for geometric factor or voltages. When this setting is enabled measurements with negative apparent resistivity are removed and never loaded into Res2DInv. Note that this option takes effect when you load a data set.
+Visible=1
+[Data settings\Automatically remove Gamma type arrays]
+Display=Automatically remove Gamma type
+Type=Bool
+Default=0
+User=0
+Advanced=0
+Description=
+Visible=0
